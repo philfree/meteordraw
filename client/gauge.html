@@ -7,19 +7,20 @@
 <template name="graph_list">
 <h1>Select a graph -</h1>
 <div id="graphs">
-{{#each graphs}}
-	---- <div class="list {{selected}}">
+{{#each graph_all}}
+	 <div class="list {{selected}}">
       <div class="display">
         <div class="list-name {{name_class}}">
           {{name}}
+          {{#each circle_pos}} 
+			  -- cx={{cx}} , cy={{cy}}
+		  {{/each}}
         </div>
       </div>
 	</div>
- {{name}}
 {{/each}}
 
 </div>
-
 </template>
 
 <template name="gauge">
