@@ -3,8 +3,10 @@ meteordraw
 
 meteor drawing app
 
-move the content of package in /usr/lib/meteor/packages/
+Installation
+------------
 
-make sure packages folder doesn't stay in your project folder.
-Not usre yet why but meteor doesn't like it.
+Follow the "Slow Start (for developers)" instructions at https://github.com/meteor/meteor#slow-start-for-developers, but use https://github.com/audreyr/meteor.git
+
+That is a fork of the latest Meteor (as of 7/15/2012) with a d3 package added.
 
