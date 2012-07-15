@@ -6,6 +6,6 @@
       var names = ["Boxes",
                    "Gauge"];
       for (var i = 0; i < names.length; i++)
-        Players.insert({name: names[i]});
+        Graphs.insert({name: names[i]});
     }
   });
