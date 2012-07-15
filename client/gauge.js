@@ -11,14 +11,14 @@ if (Meteor.is_client) {
   // ID of currently selected graph
   Session.set('graph_id', null);
 
- // Meteor.subscribe('graphs', function () {
- //   if (!Session.get('graph_id')) {
- //    var graph = Graphs.findOne({}, {sort: {name: 1}});
- //    if (graph)
- //       Router.setList(graph._id);
- //   }
- // });
-
+  Meteor.subscribe('graphs', function () {
+    if (!Session.get('graph_id')) {
+	 console.log("no graph id value in session, doing nothing for now");
+   //  var graph = Graphs.findOne({}, {sort: {name: 1}});
+   //  if (graph)
+  //      Router.setGraph(graph._id);
+    }
+  });
 
   Template.gauge.events = {
     'click input' : function () {
@@ -41,3 +41,21 @@ if (Meteor.is_client) {
     }
   };
 }
+
+//var GraphRouter = Backbone.Router.extend({
+//  routes: {
+//    ":graph_id": "main"
+//  },
+//  main: function (graph_id) {
+//    Session.set("graph_id", graph_id);
+//  },
+//  setGraph: function (graph_id) {
+//    this.navigate(graph_id, true);
+//  }
+//});
+
+//Router = new GraphRouter;
+
+//Meteor.startup(function () {
+//    Backbone.history.start({pushState: true});
+//});
