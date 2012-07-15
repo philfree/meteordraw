@@ -1,5 +1,7 @@
 // Define Minimongo collections to match server/publish.js.
 Graph = new Meteor.Collection("graphs");
+console.log("Audrey test");
+
 
 if (Meteor.is_client) {
 
@@ -23,10 +25,19 @@ if (Meteor.is_client) {
       // template data, if any, is available in 'this'
       if (typeof console !== 'undefined')
         console.log("You pressed the button");
-      // Draw a 200x200 svg blue box
-      var vis = d3.select("#vis");
-      var box = vis.append("svg");
-      box.style('width', 200).style('height', 200);
+    },
+    'click #vis' : function (event) {
+      console.log(event);
+      console.log("You clicked!");
+      var mysvg = d3.select("svg");
+      mysvg.append("circle")
+        .style("stroke", "gray")
+        .style("fill", "white")
+        .attr("r", 40)
+        .attr("cx", event.layerX)
+        .attr("cy", event.layerY)
+        .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+        .on("mouseout", function(){d3.select(this).style("fill", "white");});
     }
   };
 }
