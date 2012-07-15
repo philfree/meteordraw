@@ -1,1 +1,10 @@
-
+#vis {
+    height: 500px;
+    width:  500px;
+    border: 1px solid red;
+    position: relative
+}
+#vis svg {
+    border: 1px solid blue;
+    background: rgba(50, 50, 255,0.3);
+}
