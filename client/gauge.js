@@ -28,6 +28,18 @@ if (Meteor.is_client) {
 		Meteor.subscribe('circles', graph_id);
   });
 
+  var draw_circle = function (cx, cy) {
+    var mysvg = d3.select("svg");
+    mysvg.append("circle")
+      .style("stroke", "gray")
+      .style("fill", "white")
+      .attr("r", 40)
+      .attr("cx", cx)
+      .attr("cy", cy)
+      .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+      .on("mouseout", function(){d3.select(this).style("fill", "white");});
+  };
+
   Template.gauge.events = {
     'click input' : function () {
       // template data, if any, is available in 'this'
@@ -37,19 +49,11 @@ if (Meteor.is_client) {
     'click #vis' : function (event) {
       console.log(event);
       console.log("You clicked!");
-      var mysvg = d3.select("svg");
-      mysvg.append("circle")
-        .style("stroke", "gray")
-        .style("fill", "white")
-        .attr("r", 40)
-        .attr("cx", event.layerX)
-        .attr("cy", event.layerY)
-        .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
-        .on("mouseout", function(){d3.select(this).style("fill", "white");});
-        Circles.insert({
-		          graph_id: Session.get('graph_id'), 
-		          cx: event.layerX,
-		          cy: event.layerY }) ;
+      draw_circle(event.layerX, event.layerY);
+      Circles.insert({
+	          graph_id: Session.get('graph_id'),
+	          cx: event.layerX,
+	          cy: event.layerY }) ;
     }
   };
 }
