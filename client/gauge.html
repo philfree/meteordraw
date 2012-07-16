@@ -2,21 +2,18 @@
 <body>
   {{> gauge}}
   {{> graph_list}}
+  {{> add_graph}}
 </body>
 
 <template name="graph_list">
 <h1>Select a graph -</h1>
 <div id="graphs">
 {{#each graph_all}}
-	 <div class="list {{selected}}">
-      <div class="display">
-        <div class="list-name {{name_class}}">
-          {{name}}
+	 <div class="graph {{selected}}">
+          {{name}} : 
           {{#each circle_pos}} 
 			  -- cx={{cx}} , cy={{cy}}
 		  {{/each}}
-        </div>
-      </div>
 	</div>
 {{/each}}
 
@@ -32,4 +29,8 @@
     <svg></svg>
 </div>
 
+</template>
+
+<template name="add_graph">
+<input type="text" class="add_graph"> <input type="submit" value="Add Graph">
 </template>

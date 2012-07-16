@@ -10,3 +10,16 @@ svg {
     width: 100%;
     height: 100%;
 }
+
+#graphs { 
+   margin: 10px;
+   font-size: 15px;
+}
+
+.graph {
+	margin: 10px;
+	color: blue;
+}
+.selected { 
+	background-color: yellow;
+}
