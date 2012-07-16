@@ -4,7 +4,6 @@ Circles = new Meteor.Collection("circles");
 console.log("Audrey test");
 
 
-
 if (Meteor.is_client) {
 
   Template.gauge.drawsomething = function () {
@@ -54,7 +53,7 @@ if (Meteor.is_client) {
       console.log("You clicked!");
       draw_circle(event.layerX, event.layerY);
       Circles.insert({
-	          graph_id: Session.get('graph_id'),
+	          graph_id: Session.get('selected_graph'),
 	          cx: event.layerX,
 	          cy: event.layerY }) ;
     }
@@ -78,6 +77,17 @@ if (Meteor.is_client) {
       Router.setGraph(this._id);
     }
   };
+  
+  Template.add_graph.events = {
+	'click input.add': function () {
+	  var text = jQuery('#new-graph').val();
+      var id = Graphs.insert({name: text});
+      Router.setGraph(id);
+      Session.set("selected_graph", id);
+      jQuery('#new-graph').val('');
+    }
+  };
+  
   Template.graph_list.selected = function () {
     return Session.equals("selected_graph", this._id) ? "selected" : '';
   };
