@@ -51,7 +51,7 @@ if (Meteor.is_client) {
     'click #vis' : function (event) {
       console.log(event);
       console.log("You clicked!");
-      draw_circle(event.layerX, event.layerY);
+
       Circles.insert({
 	          graph_id: Session.get('selected_graph'),
 	          cx: event.layerX,
@@ -61,7 +61,7 @@ if (Meteor.is_client) {
 
   Template.gauge.render_circles = function () {
     Meteor.defer(function () {
-      var latest_circles = Circles.find({graph_id: graph_id}, {});
+      var latest_circles = Circles.find({graph_id: Session.get('selected_graph')}, {});
       for (circle in latest_circles) {
         draw_circle(circle.cx, circle.cy);
       }
