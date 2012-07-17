@@ -58,6 +58,15 @@ if (Meteor.is_client) {
 	          cy: event.layerY }) ;
     }
   };
+
+  Template.gauge.render_circles = function () {
+    Meteor.defer(function () {
+      var latest_circles = Circles.find({graph_id: graph_id}, {});
+      for (circle in latest_circles) {
+        draw_circle(circle.cx, circle.cy);
+      }
+    });
+  };
 }
 
   Template.graph_list.circle_pos = function () {
@@ -69,7 +78,7 @@ if (Meteor.is_client) {
 	 console.log("template function: graph_all");
      return Graphs.find({}, {});
    };
-   
+
    Template.graph_list.events = {
     'click': function () {
 	  console.log("Click event selecting Graph:"+this._id);
@@ -77,7 +86,7 @@ if (Meteor.is_client) {
       Router.setGraph(this._id);
     }
   };
-  
+
   Template.add_graph.events = {
 	'click input.add': function () {
 	  var text = jQuery('#new-graph').val();
@@ -87,12 +96,12 @@ if (Meteor.is_client) {
       jQuery('#new-graph').val('');
     }
   };
-  
+
   Template.graph_list.selected = function () {
     return Session.equals("selected_graph", this._id) ? "selected" : '';
   };
-  
-  
+
+
 var GraphRouter = Backbone.Router.extend({
   routes: {
     ":graph_id": "main"
